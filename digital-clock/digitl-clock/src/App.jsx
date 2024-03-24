@@ -17,15 +17,23 @@ useEffect(() => {
 
   const formatHour = (hour) => {
     return hour === 0 ? 12 : hour > 12 ? hour - 12 : hour;
-  }
+  };
+
+    const formatDate = (date) => {
+      const options = { weekday: "long", year: "numeric",month: "long" }
+      return date.toLocaleDateString(undefined, options);
+    };
   return (
     <>
       <div className="digital-clock">
         <h1>Digital Clock</h1>
         <div className="time">
           {formatTimeWithLeadingZero(formatHour(currentTime.getHours()))}
+          : {formatTimeWithLeadingZero(currentTime.getMinutes())}
+          : {formatTimeWithLeadingZero(currentTime.getSeconds())}
+          {currentTime.getHours() >= 12 ? " PM" : " AM"}
         </div>
-        <div className="date">Tuesday,February 6,2024</div>
+        <div className="date">{formatDate(currentTime)}</div>
       </div>
 
     </>
